@@ -1,8 +1,11 @@
 * { margin:0; padding:0; }
 .show,
 .new,
-.index { width:640px; margin:0 auto;}
+.index { width:640px; margin:0 auto; padding:50px 0; }
 .board_list { width:100%; border-collapse: collapse; border:1px solid #eee;}
 .board_list .tit,
 .board_list .date { padding:10px; border:1px solid #eee;}
 .board_list .date { width:100px; text-align:center; }
+
+.header { padding:10px; text-align:center; border-bottom:1px solid #ddd; }
+.footer { padding:10px; text-align:center; border-top:1px solid #ddd; }
