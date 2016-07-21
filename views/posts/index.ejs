@@ -12,11 +12,22 @@
   <!-- main start -->
   <div class="index">
     <a href="/posts/new">new</a>
-    <ul>
+    <table class="board_list" cellpadding="0" cellspacing="0">
+    <thead>
+    <tr>
+      <th class="tit">title</th>
+      <th class="date">date</th>
+    </tr>
+    </thead>
+    <tbody>
     <% data.forEach(function(e){ %>
-      <li><a href="/posts/<%= e.id %>"><%= e.title %></a> <span><%= e.createdAt.toLocaleDateString() %></span></li>
+    <tr>
+      <td class="tit"><a href="/posts/<%= e.id %>"><%= e.title %></a></td>
+      <td class="date"><%= e.createdAt.toLocaleDateString() %></td>
+    </tr>
     <% }) %>
-    </ul>
+    </tbody>
+    </table>
   </div>
   <!-- main end -->
 </div>
