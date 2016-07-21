@@ -49,12 +49,18 @@ app.get('/', function(req,res){
 });
 
 app.get('/posts', function(req,res){
-  Post.find({},function(err,posts){
+  Post.find({}).sort('-createdAt').exec(function(err,posts){
     if(err){
       return res.json({success:false, message:err});
     }
-    res.json({success:true, data:posts});
+    res.render("posts/index", {data:posts});
   });
+  // Post.find({},function(err,posts){
+  //   if(err){
+  //     return res.json({success:false, message:err});
+  //   }
+  //   res.json({success:true, data:posts});
+  // });
 });
 app.post('/posts', function(req,res){
   Post.create(req.body.post, function(err,post){
@@ -64,7 +70,31 @@ app.post('/posts', function(req,res){
     res.json({success:true, data:post});
   });
 });
-
+app.get('/posts/:id', function(req,res){
+  Post.findById(req.params.id, function(err,post){
+    if(err){
+      return res.json({success:false, message:err});
+    }
+    res.json({success:true, data:post});
+  });
+});
+app.put('/posts/:id', function(req,res){
+  req.body.post.updatedAt = Date.now();
+  Post.findByIdAndUpdate(req.params.id, req.body.post, function(err,post){
+    if(err){
+      return res.json({success:false, message:err});
+    }
+    res.json({success:true, data:post._id+" updated"});
+  });
+});
+app.delete('/posts/:id', function(req,res){
+  Post.findByIdAndRemove(req.params.id, function(err,post){
+    if(err){
+      return res.json({success:false, message:err});
+    }
+    res.json({success:true, data:post._id+" deleted"});
+  });
+});
 
 
 app.listen(3000, function(){
