@@ -3,8 +3,13 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var mongoose = require('mongoose');
+var passport = require('passport');
+var session = require('express-session');
+var flash = require('connect-flash');
+var async = require('async');
 var badyParser = require('body-parser');
 var methodOverride = require('method-override');
+var LocalStrategy = require('passport-local').Strategy;
 
 
 //connect db
@@ -30,6 +35,13 @@ var postSchema = mongoose.Schema({
 });
 var Post = mongoose.model('post',postSchema);
 
+var userSchema = mongoose.Schema({
+  email : { type:String, required:true, unique:true},
+  nickname : { type:String, required:true, unique:true},
+  password : { type:String, required:true},
+  createdAt : { type:Date, defautl:Date.now}
+});
+var User = mongoose.model('user',userSchema);
 
 //view setting
 app.set("view engine", 'ejs');
@@ -41,13 +53,51 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(badyParser.json());
 app.use(badyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
+app.use(flash());
 
+app.use(session({secret:'MySecret'}));
+app.use(paassport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user,done){
+  done(null, user.id);
+});
+passport.deserializeUser(function(id,done){
+  User.findIdBy(id, function(err,user){
+    done(err,user);
+  });
+});
+passport.use('local-login',
+  new LocalStrategy({
+    usernameField : 'email',
+    passwordField : 'password',
+    passReqToCallback : true
+  },
+  function(req,email,password,done){
+    User.findOne({ 'email' : email }, function(err,user){
+      if(err){
+        return done(err);
+      }
+      if(!user){
+        req.flash('email', req.body.email);
+        return done(null, false, req.flash('loginError', 'No user Found.'));
+      }
+      if(user.password != password){
+        req.flash('email', req.body.email);
+        return done(null, false, req.flash('loginError', 'Password dose not Match'));
+      }
+      return done(null, user);
+    });
+  })
+);
 
 //routes setting
 app.get('/', function(req,res){
+  res.redirect("/posts");
+});
 
-  res.render('index_ejs',data);
-
+app.get('/login', function(req,res){
+  res.render('login/login',{email:req.flash('email')[0], loginError:req.flash('loginError')});
 });
 
 app.get('/posts', function(req,res){
