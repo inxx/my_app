@@ -12,6 +12,13 @@
   <!-- main start -->
   <div class="index">
     <a href="/posts/new">new</a>
+    <% if(user) { %>
+        <a href="/logout" class="btn_logout">logout</a>
+        <a href="/users/<%= user._id %>" class="btn_mypage">profile (<%= user.nickname %>)</a>
+    <% } else { %>
+      <a href="/login" class="btn_login">login</a>
+      <a href="/users/new" class="btn_signup">sign up</a>
+    <% } %>
     <table class="board_list" cellpadding="0" cellspacing="0">
     <thead>
     <tr>

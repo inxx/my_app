@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <% include ../partials/head %>
+</head>
+<body>
+<header>
+  <% include ../partials/header %>
+</header>
+<div class="users">
+  <!-- main start -->
+
+  <div class="new">
+    <h3>Sign Up</h3>
+    <form class="users_form" id="create_user" action="/users" method="post">
+      <label>Email <span id="eamil_error" class="error_message"><%= emailError?emailError:"" %></span></label>
+      <input type="text" name="user[email]" id="email" value="<%= formData?formData.email: ""%>">
+      <label>Nickname <span id="nickname_error" class="error_message"><%= nicknameError?nicknameError:"" %></span></label>
+      <input type="text" name="user[nickname]" id="nickname" value="<%= formData?formData.nickname: ""%>">
+      <label>Password <span id="password_error" class="error_message"><%= passwordError?passwordError:"" %></span></label>
+      <input type="password" name="user[password]" id="password" value="">
+      <label>Password Confirmation<span id="password_confirmation_error" class="error_message"></span></label>
+      <input type="password_confirmation" name="user[passwordConfirmation]" id="password" value="">
+      <p><small>*Required</small></p>
+      <input type="submit" class="submit_btn" value="submit" />
+    </form>
+    <a href="javascript:history.back()">Back</a>
+  </div>
+  <script type="text/javascript" src="/js/userform.js"></script>
+  <!-- main end -->
+</div>
+<footer>
+  <% include ../partials/footer %>
+</footer>
+</body>
+</html>
