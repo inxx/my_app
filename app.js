@@ -61,7 +61,7 @@ userSchema.methods.authenticate = function(password){
   return bcrypt.compareSync(password,user.password);
 };
 userSchema.methods.hash = function(password){
-  return bcrypt.hashSync(password,user.password);
+  return bcrypt.hashSync(password);
 };
 
 var User = mongoose.model('user',userSchema);
@@ -161,14 +161,17 @@ app.post('/users', checkUserRegValidation, function(req,res,next){
 });
 
 
-app.get('/users/:id', function(req,res){
+app.get('/users/:id', isLoggedIn, function(req,res){
   User.findById(req.params.id, function(err,user){
     if(err) { return res.json({succsess:false, message:err}); }
     res.render('users/show',{user:user});
   });
 });
 
-app.get('/users/:id/edit', function(req,res){
+app.get('/users/:id/edit', isLoggedIn, function(req,res){
+  if(req.user._id != req.params.id){
+    return res.json({succsess:false, message:"Unauthhrized Attempt"});
+  }
   User.findById(req.params.id, function(err,user){
     if(err) { return res.json({succsess:false, message:err}); }
     res.render('users/edit',{
@@ -181,13 +184,15 @@ app.get('/users/:id/edit', function(req,res){
   });
 });
 
-app.put('/users/:id', checkUserRegValidation, function(req,res){
+app.put('/users/:id', isLoggedIn, checkUserRegValidation, function(req,res){
+  if(req.user._id != req.params.id){
+    return res.json({succsess:false, message:"Unauthhrized Attempt"});
+  }
   User.findById(req.params.id, req.body.user, function(err,user){
     if(err) { return res.json({succsess:false, message:err}); }
     if( user.authenticate(req.body.user.password)){
         if(req.body.user.newPassword){
           req.body.user.password = user.hash(req.body.user.newPassword);
-          user.save();
         } else {
             delete req.body.user.password;
         }
@@ -306,6 +311,13 @@ function checkUserRegValidation(req, res, next){
     }
   );
 
+}
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect('/');
 }
 
 //start server
