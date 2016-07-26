@@ -21,14 +21,14 @@
       <label>Nickname <span id="nickname_error" class="error_message"><%= nicknameError?nicknameError:"" %></span></label>
       <input type="text" name="user[nickname]" id="nickname" value="<%= formData?formData.nickname: ""%>">
 
-      <label>New Password <span id="password_error" class="error_message"><%= passwordError?passwordError:"" %></span></label>
-      <input type="password" name="user[password]" id="password" value="">
+      <label>New Password</span></label>
+      <input type="password" name="user[newPassword]" id="password" value="">
       <label>Password Confirmation<span id="password_confirmation_error" class="error_message"></span></label>
       <input type="password" name="user[passwordConfirmation]" id="password" value="">
       <p><small>*Required</small></p>
       <input type="submit" class="submit_btn" value="submit" />
     </form>
-    <a href="javascript:history.back()">Back</a>
+    <a href="javascript:history.black()">Back</a>
   </div>
   <script type="text/javascript" src="/js/userform.js"></script>
   <!-- main end -->

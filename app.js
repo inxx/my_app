@@ -174,7 +174,7 @@ app.put('/users/:id', checkUserRegValidation, function(req,res){
     } else {
       req.flash('formData', req.body.user);
       req.flash('passwordError',' - Invalid password');
-      res.redirect('/user/'+req.params.id+'/edit');
+      res.redirect('/users/'+req.params.id+'/edit');
     }
   });
 });
