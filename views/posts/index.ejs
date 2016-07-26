@@ -27,12 +27,18 @@
     </tr>
     </thead>
     <tbody>
-    <% data.forEach(function(e){ %>
-    <tr>
-      <td class="tit"><a href="/posts/<%= e.id %>"><%= e.title %></a></td>
-      <td class="date"><%= e.createdAt.toLocaleDateString() %></td>
-    </tr>
-    <% }) %>
+    <% if(data.length){ %>
+      <% data.forEach(function(e){ %>
+      <tr>
+        <td class="tit"><a href="/posts/<%= e.id %>"><%= e.title %></a></td>
+        <td class="date"><%= e.createdAt.toLocaleDateString() %></td>
+      </tr>
+      <% }) %>
+    <% } else { %>
+      <tr>
+        <td colspan="2" class="board_data_null">작성된 글이 없습니다.</td>
+      </tr>
+    <% }%>
     </tbody>
     </table>
   </div>

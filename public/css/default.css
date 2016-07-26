@@ -6,6 +6,7 @@
 .board_list .tit,
 .board_list .date { padding:10px; border:1px solid #eee;}
 .board_list .date { width:100px; text-align:center; }
+.board_data_null { padding:50px 10px; text-align:center; }
 
 .header { padding:10px; text-align:center; border-bottom:1px solid #ddd; }
 .footer { padding:10px; text-align:center; border-top:1px solid #ddd; }
