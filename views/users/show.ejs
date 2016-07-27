@@ -1,29 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <% include ../partials/head %>
+    <% include ../partials/head %>
 </head>
 <body>
-<header>
-  <% include ../partials/header %>
-</header>
-<div class="users">
-  <!-- main start -->
+	<!-- Navigation -->
+	<% include ../partials/nav %>
 
-  <div class="show">
-    <h3>User Info</h3>
-    <ul>
-      <li>email : <%= user.email %></li>
-      <li>nickname : <%= user.nickname %></li>
-    </ul>
-    <a href="/">Back</a>
-    <a href="/users/<%= user._id %>/edit">edit</a>
-  </div>
-  <script type="text/javascript" src="/js/userform.js"></script>
-  <!-- main end -->
-</div>
-<footer>
-  <% include ../partials/footer %>
-</footer>
+	<!-- Introduction -->
+	<% include ../partials/intro %>
+
+	<!-- Content -->
+	<div class="content">
+		<div class="container">
+
+      <!-- content start -->
+      <div class="users">
+        <!-- main start -->
+
+        <div class="show">
+          <h3>User Info</h3>
+          <ul>
+            <li>email : <%= user.email %></li>
+            <li>nickname : <%= user.nickname %></li>
+          </ul>
+          <a href="/">Back</a>
+          <a href="/users/<%= user._id %>/edit">edit</a>
+        </div>
+        <script type="text/javascript" src="/js/userform.js"></script>
+        <!-- main end -->
+      </div> 
+      <!-- //content start -->
+
+
+		</div>
+	</div>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+
+	<!-- Javascript -->
+	<% include ../partials/js %>
 </body>
 </html>

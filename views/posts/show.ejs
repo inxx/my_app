@@ -1,37 +1,50 @@
-<!-- views/posts/partials/show.ejs -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <% include ../partials/head %>
+    <% include ../partials/head %>
 </head>
 <body>
-<header>
-  <% include ../partials/header %>
-</header>
-<div class="posts">
-  <% include partials/top %>
-  <!-- main start -->
-  <div class="show">
-    <h3><%= data.title %></h3>
-    <p>
-      <%= data.createdAt.toLocaleDateString() %>
-      <%= data.createdAt.toLocaleTimeString() %>
-    </p>
-    <div class="body">
-      <%- escape(data.body).replace(/\n/g, '<br/>') %>
-    </div>
-    <div class="tool">
-      <a href="/posts">list</a>
-      <a href="/posts/<%= data._id %>/edit">edit</a>
-      <form class="btn_delete" action="/posts/<%= data._id %>?_method=delete" method="post">
-        <button type="submit" name="button">delete</button>
-      </form>
-    </div>
-  </div>
-  <!-- main end -->
-</div>
-<footer>
-  <% include ../partials/footer %>
-</footer>
+	<!-- Navigation -->
+	<% include ../partials/nav %>
+
+	<!-- Introduction -->
+	<% include ../partials/intro %>
+
+	<!-- Content -->
+	<div class="content">
+		<div class="container">
+
+      <!-- content start -->
+      <div class="posts">
+        <div class="show">
+          <h3><%= data.title %></h3>
+          <p>
+            <%= data.createdAt.toLocaleDateString() %>
+            <%= data.createdAt.toLocaleTimeString() %>
+          </p>
+          <div class="body">
+            <%- escape(data.body).replace(/\n/g, '<br/>') %>
+          </div>
+          <div class="tool">
+            <a href="/posts">list</a>
+            <a href="/posts/<%= data._id %>/edit">edit</a>
+            <form class="btn_delete" action="/posts/<%= data._id %>?_method=delete" method="post">
+              <button type="submit" name="button">delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- //content start -->
+
+
+		</div>
+	</div>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+
+	<!-- Javascript -->
+	<% include ../partials/js %>
 </body>
 </html>

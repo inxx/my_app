@@ -120,7 +120,11 @@ app.get('/', function(req,res){
 });
 
 app.get('/login', function(req,res){
-  res.render('login/login',{email:req.flash('email')[0], loginError:req.flash('loginError')});
+  res.render('login/login',{
+    email:req.flash('email')[0],
+    user: req.user,
+    loginError:req.flash('loginError')
+  });
 });
 
 app.post('/login', function(req,res,next){
@@ -146,6 +150,7 @@ app.get('/logout', function(req,res){
 
 app.get('/users/new', function(req,res){
   res.render('users/new',{
+    user : req.user,
     formData : req.flash('formData')[0],
     emailError : req.flash('emailError')[0],
     nicknameError : req.flash('nicknameError')[0],
@@ -224,7 +229,7 @@ app.get('/posts', function(req,res){
   // });
 });
 app.get('/posts/new', function(req,res){
-  res.render("posts/new");
+  res.render("posts/new" , {user:req.user});
 });
 
 app.post('/posts', function(req,res){
@@ -241,7 +246,7 @@ app.get('/posts/:id', function(req,res){
     if(err){
       return res.json({success:false, message:err});
     }
-    res.render("posts/show", {data:post});
+    res.render("posts/show", {data:post, user:req.user});
     //res.json({success:true, data:post});
   });
 });
@@ -250,7 +255,7 @@ app.get('/posts/:id/edit', function(req,res){
     if(err){
       return res.json({success:false, message:err});
     }
-    res.render("posts/edit", {data:post});
+    res.render("posts/edit", {data:post, user:req.user});
     //res.json({success:true, data:post});
   });
 });

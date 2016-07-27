@@ -1,0 +1,27 @@
+<!-- views/partials/header.ejs -->
+<div class="main-nav">
+  <div class="container">
+    <header class="group top-nav">
+      <nav class="navbar logo-w navbar-left" >
+        <a class="logo" href="/">TEST</a>
+      </nav>
+      <div class="navigation-toggle" data-tools="navigation-toggle" data-target="#navbar-1">
+          <span class="logo">Saturn</span>
+      </div>
+        <nav id="navbar-1" class="navbar item-nav navbar-right">
+          <ul>
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Archive</a></li>
+              <% if(user) { %>
+                <li><a href="/logout" class="btn_logout">logout</a></li>
+                <li><a href="/users/<%= user._id %>" class="btn_mypage">profile (<%= user.nickname %>)</a></li>
+              <% } else { %>
+                <li><a href="/login" class="btn_login">login</a></li>
+                <li><a href="/users/new" class="btn_signup">sign up</a></li>
+              <% } %>
+          </ul>
+      </nav>
+    </header>
+  </div>
+</div>

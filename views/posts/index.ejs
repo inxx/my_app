@@ -1,51 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <% include ../partials/head %>
+    <% include ../partials/head %>
 </head>
 <body>
-<header>
-  <% include ../partials/header %>
-</header>
-<div class="posts">
-  <% include partials/top %>
-  <!-- main start -->
-  <div class="index">
-    <a href="/posts/new">new</a>
-    <% if(user) { %>
-        <a href="/logout" class="btn_logout">logout</a>
-        <a href="/users/<%= user._id %>" class="btn_mypage">profile (<%= user.nickname %>)</a>
-    <% } else { %>
-      <a href="/login" class="btn_login">login</a>
-      <a href="/users/new" class="btn_signup">sign up</a>
-    <% } %>
-    <table class="board_list" cellpadding="0" cellspacing="0">
-    <thead>
-    <tr>
-      <th class="tit">title</th>
-      <th class="date">date</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% if(data.length){ %>
-      <% data.forEach(function(e){ %>
-      <tr>
-        <td class="tit"><a href="/posts/<%= e.id %>"><%= e.title %></a></td>
-        <td class="date"><%= e.createdAt.toLocaleDateString() %></td>
-      </tr>
-      <% }) %>
-    <% } else { %>
-      <tr>
-        <td colspan="2" class="board_data_null">작성된 글이 없습니다.</td>
-      </tr>
-    <% }%>
-    </tbody>
-    </table>
-  </div>
-  <!-- main end -->
-</div>
-<footer>
-  <% include ../partials/footer %>
-</footer>
+	<!-- Navigation -->
+	<% include ../partials/nav %>
+
+	<!-- Introduction -->
+	<% include ../partials/intro %>
+
+	<!-- Content -->
+	<div class="content">
+		<div class="container">
+
+      <!-- content start -->
+
+      <% if(data.length){ %>
+        <% data.forEach(function(e){ %>
+          <!-- Post -->
+  			<div class="post">
+  				<!-- Heading -->
+  				<a href="#"><h1><%= e.title %></h1></a>
+  				<hr>
+  				<div class="in-content">
+  					<p>
+  						<%- escape(e.body).replace(/\n/g, '<br/>') %>
+  					</p>
+  					<a class="read-more" href="/posts/<%= e.id %>">Read more</a>
+  				</div>
+  				<div class="foot-post">
+  					<div class="units-row">
+  					    <div class="unit-100">
+  					    	<strong>date:</strong>
+  					    	<%= e.createdAt.toLocaleDateString() %>
+  					    </div>
+  					    <div class="unit-100">
+  					    	<strong>COMMENTS:</strong>
+  					    	<a href="#">3</a>
+  					    </div>
+  					</div>
+  				</div>
+  			</div>
+  			<!-- /post -->
+
+        <% }) %>
+      <% } else { %>
+        <p>작성된 글이 없습니다.</p>
+      <% }%>
+
+      <% if(user) { %>
+      <a href="/posts/new" class="btn btn-single">new</a>
+      <% } %>
+      <!-- //content start -->
+
+
+		</div>
+	</div>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+
+	<!-- Javascript -->
+	<% include ../partials/js %>
 </body>
 </html>

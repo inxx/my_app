@@ -1,33 +1,47 @@
-<!-- views/posts/partials/show.ejs -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <% include ../partials/head %>
+    <% include ../partials/head %>
 </head>
 <body>
-<header>
-  <% include ../partials/header %>
-</header>
-<div class="posts">
-  <!-- main start -->
-  <div class="new">
-    <h3>new post</h3>
-    <form class="posts_form" action="/posts" method="post">
-      <div class="tit">
-        <label>title : <input type="text" name="post[title]" value=""></label>
+	<!-- Navigation -->
+	<% include ../partials/nav %>
+
+	<!-- Introduction -->
+	<% include ../partials/intro %>
+
+	<!-- Content -->
+	<div class="content">
+		<div class="container">
+
+      <!-- content start -->
+      <div class="posts">
+        <div class="new">
+          <h3>new post</h3>
+          <form class="posts_form" action="/posts" method="post">
+            <div class="tit">
+              <label>title : <input type="text" name="post[title]" value=""></label>
+            </div>
+            <div class="body">
+              <textarea name="post[body]" rows="8" cols="40"></textarea>
+            </div>
+            <div class="tool">
+            <button type="submit" name="button">submit</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="body">
-        <textarea name="post[body]" rows="8" cols="40"></textarea>
-      </div>
-      <div class="tool">
-      <button type="submit" name="button">submit</button>
-      </div>
-    </form>
-  </div>
-  <!-- main end -->
-</div>
-<footer>
-  <% include ../partials/footer %>
-</footer>
+      <!-- //content start -->
+
+
+		</div>
+	</div>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+
+	<!-- Javascript -->
+	<% include ../partials/js %>
 </body>
 </html>
