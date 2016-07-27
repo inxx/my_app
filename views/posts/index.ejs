@@ -16,24 +16,24 @@
 
       <!-- content start -->
 
-      <% if(data.length){ %>
-        <% data.forEach(function(e){ %>
+      <% if(posts.length){ %>
+        <% posts.forEach(function(post){ %>
           <!-- Post -->
   			<div class="post">
   				<!-- Heading -->
-  				<a href="#"><h1><%= e.title %></h1></a>
+  				<a href="/posts/<%= post.id %>"><h1><%= post.title %></h1></a>
   				<hr>
   				<div class="in-content">
   					<p>
-  						<%- escape(e.body).replace(/\n/g, '<br/>') %>
+  						<%- escape(post.body).replace(/\n/g, '<br/>') %>
   					</p>
-  					<a class="read-more" href="/posts/<%= e.id %>">Read more</a>
+  					<a class="read-more" href="/posts/<%= post.id %>">Read more</a>
   				</div>
   				<div class="foot-post">
   					<div class="units-row">
   					    <div class="unit-100">
   					    	<strong>date:</strong>
-  					    	<%= e.createdAt.toLocaleDateString() %>
+  					    	<%= post.createdAt.toLocaleDateString() %>
   					    </div>
   					    <div class="unit-100">
   					    	<strong>COMMENTS:</strong>

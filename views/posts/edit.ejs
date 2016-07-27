@@ -18,12 +18,12 @@
       <div class="posts">
         <div class="new">
           <h3>new post</h3>
-          <form class="posts_form" action="/posts/<%= data._id %>?_method=put" method="post">
+          <form class="posts_form" action="/posts/<%= post._id %>?_method=put" method="post">
             <div class="tit">
-              <label>title : <input type="text" name="post[title]" value="<%= data.title %>"></label>
+              <label>title : <input type="text" name="post[title]" value="<%= post.title %>"></label>
             </div>
             <div class="body">
-              <textarea name="post[body]" rows="8" cols="40"><%= data.body %></textarea>
+              <textarea name="post[body]" rows="8" cols="40"><%= post.body %></textarea>
             </div>
             <div class="tool">
             <button type="submit" name="button">submit</button>

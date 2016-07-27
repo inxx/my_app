@@ -17,20 +17,25 @@
       <!-- content start -->
       <div class="posts">
         <div class="show">
-          <h3><%= data.title %></h3>
+          <h3><%= post.title %></h3>
           <p>
-            <%= data.createdAt.toLocaleDateString() %>
-            <%= data.createdAt.toLocaleTimeString() %>
+            Author : <%= post.author.nickname %>
+            &nbsp; | &nbsp;
+            date :
+            <%= post.createdAt.toLocaleDateString() %>
+            <%= post.createdAt.toLocaleTimeString() %>
           </p>
           <div class="body">
-            <%- escape(data.body).replace(/\n/g, '<br/>') %>
+            <%- escape(post.body).replace(/\n/g, '<br/>') %>
           </div>
           <div class="tool">
             <a href="/posts">list</a>
+            <% if( user && user.equals(post.author._id) ){ %>
             <a href="/posts/<%= data._id %>/edit">edit</a>
-            <form class="btn_delete" action="/posts/<%= data._id %>?_method=delete" method="post">
+            <form class="btn_delete" action="/posts/<%= post._id %>?_method=delete" method="post">
               <button type="submit" name="button">delete</button>
             </form>
+            <% } %>
           </div>
         </div>
       </div>
