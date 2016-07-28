@@ -11,8 +11,9 @@
         <nav id="navbar-1" class="navbar item-nav navbar-right">
           <ul>
               <li class="active"><a href="/">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Archive</a></li>
+              <li><a href="#">Game</a></li>
+              <li><a href="#">Develop</a></li>
+              <li><a href="#">Etc.</a></li>
               <% if(user) { %>
                 <li><a href="/logout" class="btn_logout">logout</a></li>
                 <li><a href="/users/<%= user._id %>" class="btn_mypage">profile (<%= user.nickname %>)</a></li>

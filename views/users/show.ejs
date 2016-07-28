@@ -20,16 +20,24 @@
 
         <div class="show">
           <h3>User Info</h3>
-          <ul>
-            <li>email : <%= user.email %></li>
-            <li>nickname : <%= user.nickname %></li>
-          </ul>
-          <a href="/">Back</a>
-          <a href="/users/<%= user._id %>/edit">edit</a>
+          <table>
+          <tbody>
+            <tr>
+              <th>email</th>
+              <td><%= user.email %></td>
+            </tr>
+            <tr>
+              <th>nickname</th>
+              <td><%= user.nickname %></td>
+            </tr>
+          </tbody>
+          </table>
+
+          <a href="/users/<%= user._id %>/edit" class="btn">edit</a>
         </div>
         <script type="text/javascript" src="/js/userform.js"></script>
         <!-- main end -->
-      </div> 
+      </div>
       <!-- //content start -->
 
 

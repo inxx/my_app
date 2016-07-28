@@ -6,3 +6,189 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+.pagination {
+  margin: 24px 0;
+  font-size: 14px; }
+
+.pagination ul {
+  list-style:none;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+
+.pagination.centered ul {
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center; }
+
+.pagination em,
+.pagination a {
+  display: inline-block;
+  font-style: normal;
+  padding: 8px 16px;
+  line-height: 1;
+  border-radius: 4px;
+  white-space: nowrap;
+  border: 1px solid transparent; }
+
+.pagination a {
+  text-decoration: none;
+  color: #000; }
+  .pagination a:hover {
+    color: rgba(0, 0, 0, 0.5);
+    background: #f4f4f4; }
+
+.pagination em,
+.pagination li.active a {
+  color: rgba(0, 0, 0, 0.5);
+  background: #f4f4f4;
+  cursor: text; }
+
+.pagination.upper {
+  font-size: 11px; }
+
+  input,
+  select,
+  textarea,
+  fieldset {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 14px; }
+
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="text"],
+  input[type="date"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"] {
+    height: 40px;
+    padding: 8px 10px;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    border-radius: 2px; }
+
+  select,
+  textarea {
+    display: block;
+    width: 100%;
+    line-height: 1.75;
+    padding: 8px 10px;
+    border-radius: 2px;
+    background: #fff;
+    border: 1px solid #dfdfdf; }
+
+  select:not([multiple]) {
+    cursor: pointer;
+    height: 40px;
+    vertical-align: middle; }
+
+  label {
+    vertical-align: middle; }
+
+  textarea:focus,
+  select:focus,
+  input:focus {
+    outline: none;
+    background: #fff;
+    border-color: #bbb; }
+
+  textarea:disabled,
+  select:disabled,
+  input:disabled,
+  textarea.disabled,
+  select.disabled,
+  input.disabled {
+    resize: none;
+    opacity: 0.75;
+    cursor: default;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.5); }
+
+
+  fieldset {
+    padding: 39px 32px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px; }
+
+  legend {
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 0 1em;
+    margin-left: -1em;
+    top: 2px;
+    position: relative;
+    line-height: 0; }
+
+  .form {
+    margin-bottom: 0; }
+    .form .form-item {
+      margin-bottom: 24px; }
+    .form input[type="email"],
+    .form input[type="number"],
+    .form input[type="search"],
+    .form input[type="text"],
+    .form input[type="date"],
+    .form input[type="tel"],
+    .form input[type="url"],
+    .form input[type="password"],
+    .form select,
+    .form textarea {
+      display: block;
+      width: 100%; }
+    .form input.width-50,
+    .form textarea.width-50,
+    .form select.width-50 {
+      width: 50%; }
+    .form label {
+      font-size: 14px;
+      color: #111;
+      font-weight: normal;
+      display: block; }
+    .form .checkboxes label,
+    .form label.checkbox {
+      text-transform: none;
+      font-weight: normal;
+      cursor: pointer;
+      color: inherit;
+      font-size: 15px; }
+    .form .checkboxes label {
+      margin-bottom: 8px; }
+      .form .checkboxes label:last-child {
+        margin-bottom: 0; }
+    .form .checkboxes-inline {
+      display: block; }
+      .form .checkboxes-inline label {
+        font-size: inherit;
+        color: inherit;
+        display: inline-block;
+        margin-right: 16px;
+        text-transform: none;
+        font-weight: normal; }
+    .form span.error,
+    .form div.error,
+    .form span.success,
+    .form div.success {
+      text-transform: none;
+      font-weight: normal;
+      font-size: 12px; }
+    .form span.error,
+    .form span.success {
+      margin-left: .4rem; }
+
+  .form-inline textarea,
+  .form-inline select,
+  .form-inline input[type="email"],
+  .form-inline input[type="number"],
+  .form-inline input[type="search"],
+  .form-inline input[type="text"],
+  .form-inline input[type="date"],
+  .form-inline input[type="tel"],
+  .form-inline input[type="url"],
+  .form-inline input[type="password"] {
+    width: auto;
+    display: inline-block; }

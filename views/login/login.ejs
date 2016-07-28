@@ -18,18 +18,31 @@
       <div class="users">
 
         <div class="login">
-          <h3>Login</h3>
-          <form class="login_form" action="/login" method="post">
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" value="<%= email %>">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" value="<%= email %>">
-            <% loginError.forEach(function(e){ %>
-              <p class="error_message"><%= e %></p>
-            <% }); %>
-            <button type="submit" class="submit_btn" name="submit_btn">Submit</button>
+
+          <form class="login_form form" action="/login" method="post">
+          <fieldset>
+              <legend>Login Data</legend>
+              <div class="form-item">
+                  <label>Email</label>
+                  <input type="text" name="email" id="email" value="<%= email %>" />
+              </div>
+
+              <div class="form-item">
+                  <label>
+                    Password
+                    <% loginError.forEach(function(e){ %>
+                      <span class="error"><%= e %></span>
+                    <% }); %>
+                  </label>
+                  <input type="password" name="password" />
+              </div>
+
+              <div class="form-item end">
+                  <button type="submit" name="submit_btn" class="btn btn-single">Submit</button>
+              </div>
+          </fieldset>
           </form>
-          <a href="javascript:history.back()">Back</a>
+          <!-- <a href="javascript:history.back()">Back</a> -->
         </div>
       </div>
       <!-- //content start -->

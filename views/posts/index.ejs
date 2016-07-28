@@ -51,22 +51,23 @@
         <p>작성된 글이 없습니다.</p>
       <% }%>
 
-      <div class="pagenation">
-        <% var offset = 3 %>
+
+      <nav class="pagination centered">
         <ul>
+          <% var offset = 3 %>
           <% for(i=1;i<=maxPage;i++){ %>
             <% if( i <= offset || i > (maxPage-offset) || ( i >= page-(offset-1) && i<= page+(offset-1) )){ %>
               <% if(i != page ){ %>
                 <li><a href="/posts?page=<%= i %>"><%= i %></a></li>
               <% } else { %>
-                <li><%= i %></li>
+                <li class="active"><a href="/posts?page=<%= i %>"><%= i %></a></li>
               <% } %>
             <% } else if(i == offset+1 || i == maxPage-offset) { %>
                 <li>...</li>
             <% }%>
           <% }%>
-        </ul>
-      </div>
+      </ul>
+    </nav>
 
       <% if(user) { %>
       <a href="/posts/new" class="btn btn-single">new</a>
