@@ -54,7 +54,13 @@
 
       <nav class="pagination centered">
         <ul>
-          <% var offset = 3 %>
+          <%
+            var offset = 3;
+            var partialQuery;
+            if(urlQuery){
+              partialQuery = "&"+urlQuery.replace(/page=(.*?)(&|$)/ig,"");
+            }
+          %>
           <% for(i=1;i<=maxPage;i++){ %>
             <% if( i <= offset || i > (maxPage-offset) || ( i >= page-(offset-1) && i<= page+(offset-1) )){ %>
               <% if(i != page ){ %>

@@ -2,27 +2,45 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Post = require('../models/Post');
-
+var Counter = require('../models/Counter');
+var async = require('async');
 
 router.get('/', function(req,res){
-  var page = Math.max(1, req.query.page);
-  var limit = 10;
-  Post.count({}, function(err, count){
-    if(err){ return res.json({success:false, message:err});}
-    var skip = (page-1)*limit;
-    var maxPage = Math.ceil(count/limit);
+  var vistorCounter = null;
+  var page = Math.max(1, req.query.page)1?parseInt(req.query.page):1;
+  var limit = Math.max(1,req.query.limit)>1?parseInt(req.query.limit):10;
 
+  async.waterfall([function(callback){
+      Counter.findOne({name:"vistors"}, function(err,counter){
+          if(err){ callback(err); }
+          vistorCounter = counter;
+          callback(null);
+      });
+  }, function(callback){
+
+    Post.count({}, function(err, count){
+      if(err){  callback(err); }
+      skip = (page-1)*limit;
+      maxPage = Math.ceil(count/limit);
+      callback(null, skip, maxPage);
+    });
+  }, function(skip, maxPage, callback){
     Post.find({}).populate("author").sort('-createdAt').skip(skip).limit(limit).exec(function(err,posts){
-      if(err){ return res.json({success:false, message:err});}
-      res.render("posts/index", {
+      if(err){ callback(err); }
+      return res.render("posts/index", {
         posts:posts,
         user:req.user,
         page:page,
         maxPage:maxPage,
+        urlQuery:req._parseUrl.query,
+        counter:vistorCounter,
         postMessage:req.flash("postsMessage")[0]
       });
     });
+  }], function(err){
+        if(err){ return res.json({success:false, message:err});}
   });
+
 
   // Post.find({},function(err,posts){
   //   if(err){
@@ -48,7 +66,7 @@ router.post('/', isLoggedIn, function(req,res){
 router.get('/:id',  function(req,res){
   Post.findById(req.params.id).populate("author").exec(function(err,post){
     if(err){ return res.json({success:false, message:err}); }
-    res.render("posts/show", {post:post, page:req.query.page, user:req.user});
+    res.render("posts/show", {post:post, page:req._parseUrl.query, user:req.user});
     //res.json({success:true, data:post});
   });
 });

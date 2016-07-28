@@ -17,7 +17,10 @@
       <!-- content start -->
       <div class="posts">
         <div class="show">
+
+
           <h3><%= post.title %></h3>
+
           <p>
             Author : <%= post.author.nickname %>
             &nbsp; | &nbsp;
@@ -25,16 +28,21 @@
             <%= post.createdAt.toLocaleDateString() %>
             <%= post.createdAt.toLocaleTimeString() %>
           </p>
-          <div class="body">
+
+          <hr />
+
+          <div class="body board_desc">
             <%- escape(post.body).replace(/\n/g, '<br/>') %>
           </div>
+
+          <hr />
+
           <div class="tool">
-            <a href="/posts">list</a>
+            <a href="/posts" class="btn">list</a>
             <% if( user && user.equals(post.author._id) ){ %>
-            <a href="/posts?page=<%= page %>">back</a>
-            <a href="/posts/<%= post._id %>/edit">edit</a>
-            <form class="btn_delete" action="/posts/<%= post._id %>?_method=delete" method="post">
-              <button type="submit" name="button">delete</button>
+            <a href="/posts/<%= post._id %>/edit"  class="btn">edit</a>
+            <form class="btn_delete" action="/posts/<%= post._id %>?_method=delete" method="post" style="display:inline;">
+              <button type="submit" name="button" class="btn" >delete</button>
             </form>
             <% } %>
           </div>
