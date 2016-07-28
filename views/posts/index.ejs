@@ -21,14 +21,14 @@
           <!-- Post -->
   			<div class="post">
   				<!-- Heading -->
-  				<a href="/posts/<%= post.id %>"><h1><%= post.title %></h1></a>
+  				<a href="/posts/<%= post.id %>?page=<%= page %>"><h1><%= post.title %></h1></a>
   				<hr>
   				<div class="in-content">
   					<p>
               <%= post.body %>
   						<!-- <%- escape(post.body).replace(/\n/g, '<br/>') %>  -->
   					</p>
-  					<a class="read-more" href="/posts/<%= post.id %>">Read more</a>
+  					<a class="read-more" href="/posts/<%= post.id %>?page=<%= page %>">Read more</a>
   				</div>
   				<div class="foot-post">
   					<div class="units-row">
@@ -38,7 +38,7 @@
   					    </div>
   					    <div class="unit-100">
   					    	<strong>COMMENTS:</strong>
-  					    	<a href="#">3</a>
+  					    	3
   					    </div>
   					</div>
   				</div>
@@ -50,6 +50,23 @@
       <% } else { %>
         <p>작성된 글이 없습니다.</p>
       <% }%>
+
+      <div class="pagenation">
+        <% var offset = 3 %>
+        <ul>
+          <% for(i=1;i<=maxPage;i++){ %>
+            <% if( i <= offset || i > (maxPage-offset) || ( i >= page-(offset-1) && i<= page+(offset-1) )){ %>
+              <% if(i != page ){ %>
+                <li><a href="/posts?page=<%= i %>"><%= i %></a></li>
+              <% } else { %>
+                <li><%= i %></li>
+              <% } %>
+            <% } else if(i == offset+1 || i == maxPage-offset) { %>
+                <li>...</li>
+            <% }%>
+          <% }%>
+        </ul>
+      </div>
 
       <% if(user) { %>
       <a href="/posts/new" class="btn btn-single">new</a>

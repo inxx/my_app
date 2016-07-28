@@ -48,7 +48,7 @@ router.post('/', isLoggedIn, function(req,res){
 router.get('/:id',  function(req,res){
   Post.findById(req.params.id).populate("author").exec(function(err,post){
     if(err){ return res.json({success:false, message:err}); }
-    res.render("posts/show", {post:post, user:req.user});
+    res.render("posts/show", {post:post, page:req.query.page, user:req.user});
     //res.json({success:true, data:post});
   });
 });
