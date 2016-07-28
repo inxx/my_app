@@ -15,7 +15,7 @@
 		<div class="container">
 
       <!-- content start -->
-
+      <div class="main">
       <% if(posts.length){ %>
         <% posts.forEach(function(post){ %>
           <!-- Post -->
@@ -25,7 +25,8 @@
   				<hr>
   				<div class="in-content">
   					<p>
-  						<%- escape(post.body).replace(/\n/g, '<br/>') %>
+              <%= post.body %>
+  						<!-- <%- escape(post.body).replace(/\n/g, '<br/>') %>  -->
   					</p>
   					<a class="read-more" href="/posts/<%= post.id %>">Read more</a>
   				</div>
@@ -44,6 +45,7 @@
   			</div>
   			<!-- /post -->
 
+
         <% }) %>
       <% } else { %>
         <p>작성된 글이 없습니다.</p>
@@ -52,6 +54,7 @@
       <% if(user) { %>
       <a href="/posts/new" class="btn btn-single">new</a>
       <% } %>
+      </div>
       <!-- //content start -->
 
 

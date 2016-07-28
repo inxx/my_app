@@ -31,7 +31,7 @@
           <div class="tool">
             <a href="/posts">list</a>
             <% if( user && user.equals(post.author._id) ){ %>
-            <a href="/posts/<%= data._id %>/edit">edit</a>
+            <a href="/posts/<%= post._id %>/edit">edit</a>
             <form class="btn_delete" action="/posts/<%= post._id %>?_method=delete" method="post">
               <button type="submit" name="button">delete</button>
             </form>

@@ -5,12 +5,25 @@ var Post = require('../models/Post');
 
 
 router.get('/', function(req,res){
-  Post.find({}).populate("author").sort('-createdAt').exec(function(err,posts){
-    if(err){
-      return res.json({success:false, message:err});
-    }
-    res.render("posts/index", {posts:posts , user:req.user});
+  var page = Math.max(1, req.query.page);
+  var limit = 10;
+  Post.count({}, function(err, count){
+    if(err){ return res.json({success:false, message:err});}
+    var skip = (page-1)*limit;
+    var maxPage = Math.ceil(count/limit);
+
+    Post.find({}).populate("author").sort('-createdAt').skip(skip).limit(limit).exec(function(err,posts){
+      if(err){ return res.json({success:false, message:err});}
+      res.render("posts/index", {
+        posts:posts,
+        user:req.user,
+        page:page,
+        maxPage:maxPage,
+        postMessage:req.flash("postsMessage")[0]
+      });
+    });
   });
+
   // Post.find({},function(err,posts){
   //   if(err){
   //     return res.json({success:false, message:err});
@@ -22,7 +35,7 @@ router.get('/new', isLoggedIn, function(req,res){
   res.render("posts/new" , {user:req.user});
 });
 
-router.post('/posts', isLoggedIn, function(req,res){
+router.post('/', isLoggedIn, function(req,res){
   req.body.post.author = req.user._id;
   Post.create(req.body.post, function(err,post){
     if(err){
