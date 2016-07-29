@@ -7,34 +7,41 @@ var async = require('async');
 
 router.get('/', function(req,res){
   var vistorCounter = null;
- var page = Math.max(1,req.query.page)>1?parseInt(req.query.page):1;
+  var page = Math.max(1,req.query.page)>1?parseInt(req.query.page):1;
  var limit = Math.max(1,req.query.limit)>1?parseInt(req.query.limit):10;
 
- async.waterfall([function(callback){
-     Counter.findOne({name:"vistors"}, function (err,counter) {
-       if(err) callback(err);
-       vistorCounter = counter;
-       callback(null);
-     });
-   },function(callback){
-     Post.count({},function(err,count){
-       if(err) callback(err);
-       skip = (page-1)*limit;
-       maxPage = Math.ceil(count/limit);
-       callback(null, skip, maxPage);
-     });
-   },function(skip, maxPage, callback){
-     Post.find({}).populate("author").sort('-createdAt').skip(skip).limit(limit).exec(function (err,posts) {
-       if(err) callback(err);
-       return res.render("posts/index",{
-         posts:posts, user:req.user, page:page, maxPage:maxPage,
-         urlQuery:req._parsedUrl.query,
-         counter:vistorCounter, postsMessage:req.flash("postsMessage")[0]
-       });
-     });
-   }],function(err){
-     if(err) return res.json({success:false, message:err});
-   });
+  async.waterfall([function(callback){
+      Counter.findOne({name:"vistors"}, function(err,counter){
+          if(err){ callback(err); }
+          vistorCounter = counter;
+          callback(null);
+      });
+  }, function(callback){
+
+    Post.count({}, function(err, count){
+      if(err){  callback(err); }
+      skip = (page-1)*limit;
+      maxPage = Math.ceil(count/limit);
+      callback(null, skip, maxPage);
+    });
+  }, function(skip, maxPage, callback){
+    Post.find({}).populate("author").sort('-createdAt').skip(skip).limit(limit).exec(function(err,posts){
+      if(err){ callback(err); }
+      return res.render("posts/index", {
+        posts:posts,
+        user:req.user,
+        page:page,
+        maxPage:maxPage,
+        urlQuery:req._parsedUrl.query,
+        counter:vistorCounter,
+        postMessage:req.flash("postsMessage")[0]
+      });
+    });
+  }], function(err){
+        if(err){ return res.json({success:false, message:err});}
+  });
+
+
   // Post.find({},function(err,posts){
   //   if(err){
   //     return res.json({success:false, message:err});
