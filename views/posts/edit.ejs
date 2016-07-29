@@ -15,15 +15,33 @@
 		<div class="container">
 
       <!-- content start -->
+
+      <script type="text/javascript" src='editor/tinymce.min.js'></script>
+      <script type="text/javascript">
+      tinymce.init({
+        selector: '#boardTextarea',
+        theme: 'modern',
+        width: 600,
+        height: 300,
+        plugins: [
+          'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+          'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+          'save table contextmenu directionality emoticons template paste textcolor'
+        ],
+        content_css: 'css/content.css',
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+      });
+      </script>
+
       <div class="posts">
         <div class="new">
           <h3>new post</h3>
-          <form class="posts_form" action="/posts/<%= post._id %>?_method=put" method="post">
+          <form class="posts_form" action="/posts/<%= post._id %>?_nomethod=put" method="post">
             <div class="tit">
               <label>title : <input type="text" name="post[title]" value="<%= post.title %>"></label>
             </div>
             <div class="body">
-              <textarea name="post[body]" rows="8" cols="40"><%= post.body %></textarea>
+              <textarea name="post[body]" rows="8" cols="40" id="boardTextarea"><%= post.body %></textarea>
             </div>
             <div class="tool">
             <button type="submit" name="button">submit</button>
